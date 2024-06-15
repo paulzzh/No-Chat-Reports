@@ -11,7 +11,7 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.client.gui.layouts.LayoutElement;
-import net.minecraft.client.gui.screens.OptionsScreen;
+import net.minecraft.client.gui.screens.options.OptionsScreen;
 
 @Mixin(GridLayout.RowHelper.class)
 public abstract class MixinRowHelper {
@@ -21,7 +21,7 @@ public abstract class MixinRowHelper {
 	private void onAddChild(LayoutElement element, CallbackInfoReturnable<AbstractWidget> info) {
 		if (NCRConfig.getClient().disableTelemetry() && NCRConfig.getClient().removeTelemetryButton())
 			if (element instanceof Button button)
-				if (OptionsScreen.TELEMETRY.equals(button.getMessage())) {
+				if (AccessorOptionsScreen.getTelemetryComponent().equals(button.getMessage())) {
 					info.setReturnValue(button);
 				}
 	}
